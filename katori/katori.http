@@ -1,0 +1,6 @@
+@katori_HostAddress = http://localhost:5014
+
+GET {{katori_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

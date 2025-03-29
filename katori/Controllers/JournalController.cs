@@ -1,5 +1,5 @@
+using katori.Interfaces;
 using katori.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace katori.Controllers
@@ -8,10 +8,26 @@ namespace katori.Controllers
     [ApiController]
     public class JournalController : ControllerBase
     {
-        [HttpGet("getRecords")]
-        public async Task<List<Journal>> GetJournalRecords()
+        private readonly IJournalRepository _repository;
+        public JournalController(IJournalRepository repository) { _repository = repository; }
+
+        [HttpPost("setJournal")]
+        public IActionResult SetJournal()
         {
-            return null;
+            return Created();
+        }
+
+        [HttpGet("getJournals")]
+        public async Task<List<Journal>> GetJournals()
+        {
+            var journals = await _repository.GetAll();
+
+            if (journals is null)
+            {
+                return new List<Journal>();
+            }
+
+            return journals;
         }
 
     }

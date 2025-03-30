@@ -6,6 +6,18 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//add cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Order66", builder =>
+    {
+        builder.SetIsOriginAllowed(origin =>
+        string.IsNullOrEmpty(origin) || origin == "null")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
 //add services before build
 builder.Services.AddControllers();
 
@@ -24,6 +36,9 @@ builder.Services.AddScoped<IJournalRepository, JournalRepository>();
 builder.Services.AddScoped<IParticularRepository, ParticularRepository>();
 
 var app = builder.Build();
+
+//allow cors
+app.UseCors("Order66");
 
 //call methods to run the services
 //add list of journals to Journals table

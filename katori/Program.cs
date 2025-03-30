@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 //add services before build
 builder.Services.AddControllers();
 
+//dependency injections
 //ef core
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {

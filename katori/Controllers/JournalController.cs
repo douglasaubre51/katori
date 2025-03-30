@@ -27,7 +27,7 @@ namespace katori.Controllers
 
             _repository.Add(newJournal);
 
-            return Ok(newJournal);
+            return CreatedAtAction("SetJournal", newJournal);
         }
 
         [HttpGet("getJournals")]

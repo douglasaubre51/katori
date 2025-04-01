@@ -1,6 +1,19 @@
 @katori_HostAddress = http://localhost:5014
 
-GET {{katori_HostAddress}}/weatherforecast/
+# get list of journals
+GET {{katori_HostAddress}}/api/journal/getJournals
 Accept: application/json
 
 ###
+#add a new journal
+POST {{katori_HostAddress}}/api/journal/setjournal
+Content-Type: application/json
+
+{
+    "particular1":"Insurance",
+    "particular2":"Debt",
+    "comment":"we need more money to pay the insurance!",
+    "debit":"10000000",
+    "credit":"12",
+    "date":"3012-04-12"
+}

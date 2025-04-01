@@ -11,7 +11,7 @@ public class JournalRepository : IJournalRepository
     public JournalRepository(ApplicationDbContext context) { _context = context; }
 
     public Task<Journal> GetById(int id) { return _context.Journals.SingleOrDefaultAsync(e => e.JournalId == id); }
-    public Task<List<Journal>> GetAll() { return _context.Journals.ToListAsync(); }
+    public Task<List<Journal>> GetAll() { return _context.Journals.OrderByDescending(e => e.JournalId).ToListAsync(); }
 
     public bool Add(Journal journal)
     {

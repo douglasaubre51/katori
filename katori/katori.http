@@ -17,3 +17,11 @@ Content-Type: application/json
     "credit":"12",
     "date":"3012-04-12"
 }
+
+###
+
+#get all particulars
+GET {{katori_HostAddress}}/api/particular/getParticulars
+Accept: application/json
+
+###

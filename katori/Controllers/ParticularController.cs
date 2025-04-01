@@ -1,3 +1,4 @@
+using katori.DTO;
 using katori.Interfaces;
 using katori.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,13 @@ namespace katori.Controllers
             }
 
             return Ok(particulars);
+        }
+
+        //create new particular
+        [HttpPost("setParticular")]
+        public async Task<ActionResult> setParticular([FromBody] ParticularDTO dto)
+        {
+            return Ok();
         }
     }
 }

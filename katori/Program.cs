@@ -32,21 +32,27 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //add repositories
 builder.Services.AddScoped<IJournalRepository, JournalRepository>();
-
 builder.Services.AddScoped<IParticularRepository, ParticularRepository>();
+builder.Services.AddScoped<ILedgerRepository, LedgerRepository>();
 
 var app = builder.Build();
 
-//allow cors
-app.UseCors("Order66");
-
 //call methods to run the services
 //add list of journals to Journals table
-if (args.Length == 1 && args[0].ToLower() == "add-journals")
+if (args.Length == 1 && args[0].ToLower() == "add")
 {
     Add.AddJournals(app);
     return;
 }
+//retreve data
+if (args.Length == 1 && args[0].ToLower() == "ret")
+{
+    Retrieve.RetrieveLedgers(app);
+    return;
+}
+
+//allow cors
+app.UseCors("Order66");
 
 app.UseHttpsRedirection();
 

@@ -10,39 +10,33 @@ public class Add
         {
             var context = scope.ServiceProvider.GetService<ApplicationDbContext>();
 
-            var journal1 = new Journal()
+
+            var particulars = new List<Particular>();
+
+            particulars.AddRange(
+                new Particular
+                {
+                    Title = "Cash",
+                    Amount = 45000,
+                    Date = new DateOnly(2001, 11, 19)
+                },
+
+                new Particular
+                {
+                    Title = "Sales",
+                    Amount = 93200,
+                    Date = new DateOnly(2131, 1, 9),
+                }
+            );
+
+            var ledger = new Ledger()
             {
-                Particular1 = "Purchase",
-                Particular2 = "Sales",
-                Comment = "made Purchase and Sales!",
-                Debit = 79040,
-                Credit = 80001,
-                Date = new DateOnly(2024, 5, 24)
+                Title = "Cash",
+                Particulars = particulars
             };
 
-            var journal2 = new Journal()
-            {
-                Particular1 = "Inventory",
-                Particular2 = "Sales",
-                Comment = "made Inventory and Sales!",
-                Debit = 124652,
-                Credit = 24001,
-                Date = new DateOnly(2004, 8, 2)
-            };
-
-            var journal3 = new Journal()
-            {
-                Particular1 = "Cash",
-                Particular2 = "Insurance",
-                Comment = "made Cash and Insurance!",
-                Debit = 90,
-                Credit = 100290,
-                Date = new DateOnly(3244, 6, 29)
-            };
-
-            context.Journals.Add(journal1);
-            context.Journals.Add(journal2);
-            context.Journals.Add(journal3);
+            context.Ledgers
+            .Add(ledger);
 
             context.SaveChanges();
         }

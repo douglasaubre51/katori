@@ -5,13 +5,15 @@ GET {{katori_HostAddress}}/api/journal/getJournals
 Accept: application/json
 
 ###
-#add a new journal
+
+
+# add a new journal
 POST {{katori_HostAddress}}/api/journal/setjournal
 Content-Type: application/json
 
 {
-    "particular1":"Insurance",
-    "particular2":"Debt",
+    "particular1":"Purchase",
+    "particular2":"Sales",
     "comment":"we need more money to pay the insurance!",
     "debit":"10000000",
     "credit":"12",
@@ -20,8 +22,24 @@ Content-Type: application/json
 
 ###
 
-#get all particulars
+# get all particulars
 GET {{katori_HostAddress}}/api/particular/getParticulars
 Accept: application/json
 
 ###
+
+# create a new ledger
+POST {{katori_HostAddress}}/api/ledger/setledger
+Content-Type:application/json
+
+{
+    "title":"Sales",
+    "ledgertype":"CREDIT"
+}
+
+
+###
+
+# get all ledgers
+GET  {{katori_HostAddress}}/api/ledger/getledgers
+Accept: application/json

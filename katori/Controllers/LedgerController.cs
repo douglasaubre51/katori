@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using katori.Dto;
 using katori.Interfaces;
 using katori.Models;
@@ -16,9 +17,9 @@ namespace katori.Controllers
         }
 
         [HttpPost("setLedger")]
-        public ActionResult<Ledger> SetLedger([FromBody] LedgerDto dto)
+        public async Task<ActionResult<Ledger>> SetLedger([FromBody] LedgerDto dto)
         {
-            var tempLedger = _repository.GetByTitle(dto.Title);
+            var tempLedger = await _repository.GetByTitle(dto.Title);
 
             if (tempLedger is null)
             {
@@ -36,6 +37,16 @@ namespace katori.Controllers
             }
 
             return BadRequest("ledger already exists!");
+        }
+
+        [HttpGet("getLedgers")]
+        public async Task<ActionResult<List<Ledger>>> GetLedgers()
+        {
+            var ledgers = await _repository.GetAll();
+
+            if (ledgers is null) return BadRequest("no ledgers exists!");
+
+            return Ok(ledgers);
         }
     }
 }

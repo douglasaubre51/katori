@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using katori.Enums;
 
 namespace katori.Models;
 
@@ -10,8 +11,8 @@ public class Particular
     public string Title { get; set; } = "";
     public decimal Amount { get; set; }
     public DateOnly Date { get; set; }
+    public LedgerTypes LedgerType { get; set; }
 
-    public int JournalId { get; set; }
     public Ledger? Ledger { get; set; }
 
 }

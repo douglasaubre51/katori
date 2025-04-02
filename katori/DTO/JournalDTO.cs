@@ -1,8 +1,6 @@
-using System;
+namespace katori.Dto;
 
-namespace katori.DTO;
-
-public class JournalDTO
+public class JournalDto
 {
     public string Particular1 { get; set; } = "";
     public string Particular2 { get; set; } = "";

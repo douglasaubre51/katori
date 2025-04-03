@@ -30,7 +30,6 @@ namespace katori.Controllers
                 };
 
                 var isAdded = _repository.Add(ledger);
-
                 if (isAdded) return CreatedAtAction("SetLedger", ledger);
 
                 return BadRequest("ledger not created!");
@@ -48,8 +47,14 @@ namespace katori.Controllers
             bool result = await _repository.SetSumOfParticulars(title);
 
             ledger = await _repository.GetByTitle(title);
-            return Ok(ledger);
 
+            return Ok(ledger);
+        }
+
+        [HttpGet("getLedgerTitles")]
+        public async Task<ActionResult<List<string>>> GetLedgerTitles()
+        {
+            return Ok(await _repository.GetLedgersTitles() ?? null);
         }
     }
 }

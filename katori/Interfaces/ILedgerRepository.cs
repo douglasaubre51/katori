@@ -5,6 +5,7 @@ namespace katori.Interfaces;
 public interface ILedgerRepository
 {
     Task<bool> SetSumOfParticulars(string ledgerName);
+    Task<List<string>> GetLedgersTitles();
     Task<Ledger> GetByTitle(string title);
 
     Task<List<Ledger>> GetAll();

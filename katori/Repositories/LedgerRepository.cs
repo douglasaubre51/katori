@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using katori.Data;
 using katori.Enums;
 using katori.Interfaces;
@@ -30,6 +31,14 @@ public class LedgerRepository : ILedgerRepository
 
         return Save();
     }
+
+    public async Task<List<string>> GetLedgersTitles()
+    {
+        return await _context.Ledgers
+        .AsNoTracking()
+        .Select(e => e.Title).ToListAsync();
+    }
+
     public async Task<Ledger> GetByTitle(string title)
     {
         return await _context.Ledgers

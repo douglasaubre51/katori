@@ -55,7 +55,6 @@ public class ParticularRepository : IParticularRepository
         .ToListAsync();
     }
 
-
     public bool Update(Particular particular)
     {
         _context.Particulars.Update(particular);

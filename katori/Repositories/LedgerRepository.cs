@@ -26,13 +26,14 @@ public class LedgerRepository : ILedgerRepository
         .Sum(e => e.Amount);
 
         ledger.TotalCredit = debit;
-        ledger.TotalDebit = debit;
+        ledger.TotalDebit = credit;
 
         return Save();
     }
     public async Task<Ledger> GetByTitle(string title)
     {
         return await _context.Ledgers
+        .AsNoTracking()
         .SingleOrDefaultAsync(e => e.Title == title);
     }
 
@@ -66,6 +67,9 @@ public class LedgerRepository : ILedgerRepository
     }
     public bool Save()
     {
-        return _context.SaveChanges() > 0;
+        bool result = _context.SaveChanges() > 0;
+        Console.WriteLine($"State entries :{result}");
+
+        return result;
     }
 }

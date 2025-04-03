@@ -12,10 +12,10 @@ POST {{katori_HostAddress}}/api/journal/setjournal
 Content-Type: application/json
 
 {
-    "particular1":"Purchase",
-    "particular2":"Sales",
+    "particular1":"Cash",
+    "particular2":"Purchase",
     "comment":"we need more money to pay the insurance!",
-    "debit":"10000000",
+    "debit":"9999",
     "credit":"12",
     "date":"3012-04-12"
 }
@@ -33,13 +33,20 @@ POST {{katori_HostAddress}}/api/ledger/setledger
 Content-Type:application/json
 
 {
-    "title":"Sales",
-    "ledgertype":"CREDIT"
+    "title":"cash",
+    "ledgertype":"credit"
 }
 
 
 ###
 
 # get all ledgers
-GET  {{katori_HostAddress}}/api/ledger/getledgers
+@var1=purchase
+GET  {{katori_HostAddress}}/api/ledger/getledgers?title={{var1}}
+Accept: application/json
+
+###
+
+@var2=cash
+GET  {{katori_HostAddress}}/api/ledger/getledgers?title={{var2}}
 Accept: application/json

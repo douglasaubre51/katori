@@ -28,6 +28,7 @@ public class ApplicationDbContext : DbContext
         //relations
         builder.Entity<Ledger>()
         .HasMany(e => e.Particulars)
-        .WithOne(e => e.Ledger);
+        .WithOne(e => e.Ledger)
+        .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -40,13 +40,16 @@ namespace katori.Controllers
         }
 
         [HttpGet("getLedgers")]
-        public async Task<ActionResult<List<Ledger>>> GetLedgers()
+        public async Task<ActionResult<Ledger>> GetLedgerByTitle(string title)
         {
-            var ledgers = await _repository.GetAll();
+            var ledger = await _repository.GetByTitle(title);
+            if (ledger is null) return BadRequest("ledger doesnot exist!");
 
-            if (ledgers is null) return BadRequest("no ledgers exists!");
+            bool result = await _repository.SetSumOfParticulars(title);
 
-            return Ok(ledgers);
+            ledger = await _repository.GetByTitle(title);
+            return Ok(ledger);
+
         }
     }
 }

@@ -6,6 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//add swagger
+builder.Services.AddOpenApi();
+builder.Services.AddSwaggerGen();
+
 //add cors
 builder.Services.AddCors(options =>
 {
@@ -53,6 +57,10 @@ if (args.Length == 1 && args[0].ToLower() == "ret")
 
 //allow cors
 app.UseCors("Order66");
+
+//add swagger ui
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

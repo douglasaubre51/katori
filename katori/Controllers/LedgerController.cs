@@ -38,7 +38,7 @@ namespace katori.Controllers
             return BadRequest("ledger already exists!");
         }
 
-        [HttpGet("getLedgers")]
+        [HttpGet("getLedgerByTitle")]
         public async Task<ActionResult<Ledger>> GetLedgerByTitle(string title)
         {
             var ledger = await _repository.GetByTitle(title);

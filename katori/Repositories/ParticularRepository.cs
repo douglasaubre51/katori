@@ -38,8 +38,8 @@ public class ParticularRepository : IParticularRepository
         };
 
 
-        ledger1.Particulars.Add(particular2);
-        ledger2.Particulars.Add(particular1);
+        ledger1.Particulars.Add(particular1);
+        ledger2.Particulars.Add(particular2);
 
         return Save();
     }

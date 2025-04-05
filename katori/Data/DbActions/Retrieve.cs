@@ -33,6 +33,7 @@ public class Retrieve
                         stream.WriteLine(p.Title);
                         stream.WriteLine(p.Amount);
                         stream.WriteLine(p.Date);
+                        stream.WriteLine(p.LedgerType.ToString());
                     }
                 }
             }

@@ -1,37 +1,25 @@
-01-04-2025 5.25.37 PM
+05-04-2025 10.11.44 PM
 ledger:-
 
 1
-Purchase
+cash
 
 particular:-
 
-3
-Cash
-45000.00
-19-11-2001
-
-particular:-
-
-4
-Sales
-93200.00
-09-01-2131
+2
+purchase
+4000.00
+05-04-2025
+DEBIT
 ledger:-
 
-3
-Cash
+2
+purchase
 
 particular:-
 
-5
-Cash
-45000.00
-19-11-2001
-
-particular:-
-
-6
-Sales
-93200.00
-09-01-2131
+1
+cash
+4000.00
+05-04-2025
+CREDIT

@@ -23,7 +23,12 @@ builder.Services.AddCors(options =>
 });
 
 //add services before build
-builder.Services.AddControllers();
+//change json prop naming scheme from camelcase to original 
+builder.Services.AddControllers()
+.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+});
 
 //dependency injections
 //ef core

@@ -37,12 +37,14 @@ namespace katori.Controllers
             return BadRequest("ledger already exists!");
         }
 
+	// also sets total credit and debit
         [HttpGet("getLedgerByTitle")]
         public async Task<ActionResult<Ledger>> GetLedgerByTitle(string title)
         {
             var ledger = await _repository.GetByTitle(title);
             if (ledger is null) return BadRequest("ledger doesnot exist!");
 
+	    // calculate total credit and debit!
             bool result = await _repository.SetSumOfParticulars(title);
 
             ledger = await _repository.GetByTitle(title);

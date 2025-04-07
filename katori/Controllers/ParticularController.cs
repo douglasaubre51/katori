@@ -32,6 +32,7 @@ namespace katori.Controllers
         }
 
         //get dr and cr side of ledger
+	// also sets total credit and debit
         [HttpGet("getParticularsOfLedger")]
         public async Task<ActionResult<ParticularDto>> GetParticularsOfLedger(string ledgerName)
         {
@@ -40,7 +41,7 @@ namespace katori.Controllers
             if (validate is null)
                 return BadRequest();
 
-	    await _ledgerRepository.SetSumOfParticulars(ledgerName);
+            await _ledgerRepository.SetSumOfParticulars(ledgerName);
 
             var debitParticulars = await _particularRepository.GetDebitParticularsByTitle(ledgerName);
 

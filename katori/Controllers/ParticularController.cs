@@ -11,6 +11,7 @@ namespace katori.Controllers
     {
         private readonly IParticularRepository _particularRepository;
         private readonly ILedgerRepository _ledgerRepository;
+
         public ParticularController(ILedgerRepository ledgerRepository, IParticularRepository particularRepository)
         {
             _ledgerRepository = ledgerRepository;
@@ -38,6 +39,8 @@ namespace katori.Controllers
 
             if (validate is null)
                 return BadRequest();
+
+	    await _ledgerRepository.SetSumOfParticulars(ledgerName);
 
             var debitParticulars = await _particularRepository.GetDebitParticularsByTitle(ledgerName);
 

@@ -24,23 +24,23 @@ public class ParticularRepository : IParticularRepository
 
         var particular1 = new Particular()
         {
-            Title = journal.Particular2,
-            Amount = journal.Debit,
-            Date = journal.Date,
-            LedgerType = ledger2.LedgerType
-        };
-
-        var particular2 = new Particular()
-        {
             Title = journal.Particular1,
             Amount = journal.Debit,
             Date = journal.Date,
             LedgerType = ledger1.LedgerType
         };
 
+        var particular2 = new Particular()
+        {
+            Title = journal.Particular2,
+            Amount = journal.Credit,
+            Date = journal.Date,
+            LedgerType = ledger2.LedgerType
+        };
 
-        ledger1.Particulars.Add(particular1);
-        ledger2.Particulars.Add(particular2);
+
+        ledger1.Particulars.Add(particular2);
+        ledger2.Particulars.Add(particular1);
 
         return Save();
     }

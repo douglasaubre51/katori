@@ -59,6 +59,12 @@ if (args.Length == 1 && args[0].ToLower() == "ret")
     Retrieve.RetrieveLedgers(app);
     return;
 }
+//seed data
+if (args.Length == 1 && args[0].ToLower() == "seed")
+{
+    SeedData.Execute(app);
+    return;
+}
 
 //allow cors
 app.UseCors("Order66");

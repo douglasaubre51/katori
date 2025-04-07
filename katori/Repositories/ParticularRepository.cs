@@ -1,4 +1,5 @@
 using katori.Data;
+using katori.Enums;
 using katori.Interfaces;
 using katori.Models;
 using Microsoft.EntityFrameworkCore;
@@ -23,25 +24,47 @@ public class ParticularRepository : IParticularRepository
 
         var particular1 = new Particular()
         {
-            Title = journal.Particular2,
-            Amount = journal.Debit,
-            Date = journal.Date,
-            LedgerType = ledger2.LedgerType
-        };
-
-        var particular2 = new Particular()
-        {
             Title = journal.Particular1,
             Amount = journal.Debit,
             Date = journal.Date,
             LedgerType = ledger1.LedgerType
         };
 
+        var particular2 = new Particular()
+        {
+            Title = journal.Particular2,
+            Amount = journal.Credit,
+            Date = journal.Date,
+            LedgerType = ledger2.LedgerType
+        };
 
-        ledger1.Particulars.Add(particular1);
-        ledger2.Particulars.Add(particular2);
+
+        ledger1.Particulars.Add(particular2);
+        ledger2.Particulars.Add(particular1);
 
         return Save();
+    }
+
+    //get dr side of ledger table
+    public async Task<List<Particular>> GetDebitParticularsByTitle(string ledgerName)
+    {
+        return await _context.Ledgers
+        .AsNoTracking()
+        .Include(e => e.Particulars)
+        .Where(e => e.Title == ledgerName)
+        .SelectMany(e => e.Particulars.Where(e => e.LedgerType == LedgerTypes.DEBIT))
+        .ToListAsync();
+    }
+
+    //get cr side of ledger table
+    public async Task<List<Particular>> GetCreditParticularsByTitle(string ledgerName)
+    {
+        return await _context.Ledgers
+        .AsNoTracking()
+        .Include(e => e.Particulars)
+        .Where(e => e.Title == ledgerName)
+        .SelectMany(e => e.Particulars.Where(e => e.LedgerType == LedgerTypes.CREDIT))
+        .ToListAsync();
     }
 
     public Task<Particular> GetById(int id)

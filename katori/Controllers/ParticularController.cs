@@ -32,7 +32,7 @@ namespace katori.Controllers
         }
 
         //get dr and cr side of ledger
-	// also sets total credit and debit
+        // also sets total credit and debit
         [HttpGet("getParticularsOfLedger")]
         public async Task<ActionResult<ParticularDto>> GetParticularsOfLedger(string ledgerName)
         {

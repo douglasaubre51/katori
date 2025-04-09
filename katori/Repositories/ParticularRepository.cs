@@ -27,7 +27,8 @@ public class ParticularRepository : IParticularRepository
             Title = journal.Particular1,
             Amount = journal.Debit,
             Date = journal.Date,
-            LedgerType = ledger1.LedgerType
+            LedgerType = ledger1.LedgerType,
+	      IsCr=true
         };
 
         var particular2 = new Particular()
@@ -35,7 +36,8 @@ public class ParticularRepository : IParticularRepository
             Title = journal.Particular2,
             Amount = journal.Credit,
             Date = journal.Date,
-            LedgerType = ledger2.LedgerType
+            LedgerType = ledger2.LedgerType,
+	      IsDr=true
         };
 
 
@@ -52,7 +54,7 @@ public class ParticularRepository : IParticularRepository
         .AsNoTracking()
         .Include(e => e.Particulars)
         .Where(e => e.Title == ledgerName)
-        .SelectMany(e => e.Particulars.Where(e => e.LedgerType == LedgerTypes.DEBIT))
+        .SelectMany(e => e.Particulars.Where(e => e.IsDr == true))
         .ToListAsync();
     }
 
@@ -63,7 +65,7 @@ public class ParticularRepository : IParticularRepository
         .AsNoTracking()
         .Include(e => e.Particulars)
         .Where(e => e.Title == ledgerName)
-        .SelectMany(e => e.Particulars.Where(e => e.LedgerType == LedgerTypes.CREDIT))
+        .SelectMany(e => e.Particulars.Where(e => e.IsCr == true))
         .ToListAsync();
     }
 

@@ -18,15 +18,15 @@ public class LedgerRepository : ILedgerRepository
         .SingleOrDefaultAsync(e => e.Title == ledgerName);
 
         decimal debit = ledger.Particulars
-        .Where(e => e.LedgerType == LedgerTypes.DEBIT)
+        .Where(e => e.IsDr == true)
         .Sum(e => e.Amount);
 
         decimal credit = ledger.Particulars
-        .Where(e => e.LedgerType == LedgerTypes.CREDIT)
+        .Where(e => e.IsCr == true)
         .Sum(e => e.Amount);
 
-        ledger.TotalCredit = debit;
-        ledger.TotalDebit = credit;
+        ledger.TotalCredit = credit;
+        ledger.TotalDebit = debit;
 
         return Save();
     }

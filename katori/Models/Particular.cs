@@ -12,7 +12,8 @@ public class Particular
     public decimal Amount { get; set; }
     public DateOnly Date { get; set; }
     public LedgerTypes LedgerType { get; set; }
+    public bool IsDr { get; set; }
+    public bool IsCr { get; set; }
 
     public Ledger? Ledger { get; set; }
-
 }
